@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC-Train Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, #065d34, #0a8542);
+            padding: 15px 50px;
+        }
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .book-now {
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+        }
+        .hero-content {
+            max-width: 50%;
+        }
+        .hero-content h4 {
+            color: grey;
+        }
+        .hero-content h1 {
+            font-size: 40px;
+            color: #1a1a1a;
+        }
+        .hero-content p {
+            color: grey;
+            line-height: 1.5;
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .container1 {
+            width: 90%;
+            margin: auto;
+            padding: 50px 0;
+        }
+        .hero1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 50px;
+        }
+        .hero-content1 {
+            max-width: 50%;
+        }
+        .hero-content1 h4 {
+            color: grey;
+        }
+        .hero-content h1 {
+            font-size: 40px;
+            color: #1a1a1a;
+        }
+        .hero-content1 p {
+            color: grey;
+            line-height: 1.5;
+        }
+        .explore-btn {
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .hero-image1 img {
+            width: 100%;
+            max-width: 500px;
+        }
+        .features1 {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        .feature-card1 {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            text-align: center;
+        }
+        .feature-card1 img {
+            width: 100px;
+            margin-bottom: 10px;
+            border-radius: 50%;
+        }
+
+        /*3rd webpage*/
+        .container3 {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero-section3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .hero-image3 {
+            flex: 1;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .hero-image3 img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .chat-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+        }
+        
+        .mobile-app {
+            position: absolute;
+            bottom: -80px;
+            right: 100px;
+            width: 120px;
+            transform: rotate(10deg);
+        }
+        
+        .hero-content3 {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .small-heading {
+            color: #707991;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        h1 {
+            font-size: 42px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        
+        .description {
+            color: #707991;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #333;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #ffb300;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .train-image {
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            width: 120px;
+            opacity: 0.8;
+        }
+        
+        .deals-section3 {
+            margin-top: 60px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-header img {
+            width: 28px;
+            margin-right: 10px;
+        }
+        
+        .section-header3 img {
+            width: 100px;
+        }
+
+        .section-header h2 {
+            color: #3b6fba;
+            font-size: 24px;
+        }
+        
+        .deals-grid3 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .deal-card3 {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .deal-card3:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .deal-content3 {
+            padding: 20px;
+        }
+        
+        .deal-title3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .deal-description3 {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        .deal-cta {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .deal-icons3{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        
+        .deal-icon3 {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 1024px) {
+            .deals-grid3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section3 {
+                flex-direction: column;
+            }
+            
+            .hero-content3 {
+                order: 2;
+            }
+            
+            .hero-image3 {
+                order: 1;
+            }
+            
+            .deals-grid3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<link rel="web icon" href="irctc_logo-removebg-preview.png" type="png">
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">IRCTC</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="list.html">Trains</a></li>
+                <li><a href="track.html">Track Train</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <a href="login.html">
+                <button class="book-now">Login/Sign Up</button>
+            </a>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h4>Experience the Convenience of IRCTC</h4>
+            <h1>Discover India's Premier Rail</h1>
+            <p>IRCTC offers a seamless and user-friendly online booking experience, allowing you to plan your train journeys with ease. Explore a wide range of train options, check availability.</p>
+            <a href="booking.html"><button class="book-now">Book Now</button></a>
+        </div>
+        <div class="hero-image">
+            <img src="bookBgImg.webp" alt="Train Image">
+        </div>
+    </section>
+     <div class="container1">
+        <section class="hero1">
+            <div class="hero-content1">
+                <h4>Explore the Wonders</h4>
+                <h1>Discover India</h1>
+                <p>From bustling metropolises to serene landscapes, IRCTC connects you to the diverse destinations across India. Plan your next adventure and embark on a remarkable journey.</p>
+                <button class="explore-btn">Explore More</button>
+            </div>
+            <div class="hero-image1">
+                <img src="trainimg.png" alt="IRCTC Station">
+            </div>
+        </section>
+        <section class="features1">
+            <div class="feature-card1">
+                <img src="plan.webp" alt="Plan">
+                <h3>Simplify Your Journey</h3>
+                <p>Plan your travel with ease using IRCTC’s seamless booking experience.</p>
+            </div>
+            <div class="feature-card1">
+                <img src="explore.webp" alt="Explore">
+                <h3>Explore Destinations</h3>
+                <p>Find new places and book your next adventure effortlessly.</p>
+            </div>
+            <div class="feature-card1">
+                <img src="booking.webp" alt="Booking">
+                <h3>Book with Confidence</h3>
+                <p>Reliable, convenient, and secure train ticket booking.</p>
+            </div>
+        </section>
+    </div>
+  
+
+    <div class="container3">
+        <div class="hero-section3">
+            <div class="hero-image3">
+                <img src="IRCTC 3D Illustration.webp" alt="IRCTC 3D Illustration" class="main-illustration">
+            </div>
+            
+            <div class="hero-content3">
+                <p class="small-heading">Explore the IRCTC Advantage</p>
+                <h1>Seamless Booking</h1>
+                <p class="description">IRCTC offers a user-friendly platform that simplifies the booking process, allowing you to quickly and securely reserve your train tickets. Enjoy a stress-free travel experience with our comprehensive services</p>
+                <a href="booking.html" class="cta-button">Book Now</a>
+            </div>
+        </div>
+        
+        <div class="deals-section3">
+            <div class="section-header3">
+                <img src="deals icon.png" alt="Deals Icon">
+                <h2>Discover Deals</h2>
+            </div>
+            
+            <div class="deals-grid3">
+                <div class="deal-card3">
+                    <div class="deal-content3">
+                        <h3 class="deal-title">Travel with Convenience</h3>
+                        <div class="deal-icons3">
+                            <img src="express icon.webp" alt="Express" class="deal-icons3">
+                            <img src="express Train.webp" alt="Train" class="deal-icon3">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deal-card3">
+                    <div class="deal-content3">
+                        <h3 class="deal-title">Holiday Packages</h3>
+                        <div class="deal-icons3">
+                            <img src="irctc logo.webp" alt="IRCTC Logo" class="deal-icons3">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deal-card3">
+                    <div class="deal-content3">
+                        <h3 class="deal-title">Plan Your Journey</h3>
+                        <p class="deal-description3">IRCTC - Your Gateway to Seamless Train Travel Across India</p>
+                        <a href="booking.html" class="deal-cta">Book with Ease</a>
+                    </div>
+                </div>
+                
+                <div class="deal-card3">
+                    <div class="deal-content3">
+                        <h3 class="deal-title">IRCTC iZONE Discounts</h3>
+                        <div class="deal-icons3">
+                            <img src="dealsIcon.webp" alt="Discount Zone" class="deal-icons3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // Animation for elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate the mobile app icon with a slight floating effect
+            const mobileApp = document.querySelector('.mobile-app');
+            let position = 0;
+            let direction = 1;
+            
+            setInterval(() => {
+                position += 0.3 * direction;
+                if (position > 10 || position < 0) {
+                    direction *= -1;
+                }
+                mobileApp.style.transform = `rotate(10deg) translateY(${position}px)`;
+            }, 50);
+            
+            // Add hover effects to deal cards
+            const dealCards = document.querySelectorAll('.deal-card3');
+            dealCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.backgroundColor = '#f9f9f9';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.backgroundColor = 'white';
+                });
+            });
+            
+            // Add special offers dynamically
+            const offersData = [
+                { title: '10% off on Tatkal Bookings', description: 'Use code TATKAL10' },
+                { title: 'Zero Payment Gateway Charges', description: 'When using UPI payments' },
+                { title: 'Senior Citizen Extra Discount', description: 'Additional 5% on base fare' },
+                { title: 'Free Cancellation Insurance', description: 'On premium bookings' }
+            ];
+            
+            const createOffer = (offer) => {
+                const notification = document.createElement('div');
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = 'white';
+                notification.style.padding = '15px';
+                notification.style.borderRadius = '8px';
+                notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                notification.style.zIndex = '1000';
+                notification.style.maxWidth = '300px';
+                notification.style.transform = 'translateX(400px)';
+                notification.style.transition = 'transform 0.5s ease';
+                
+                notification.innerHTML = `
+                    <h4 style="margin-bottom: 5px; color: #e74c3c;">${offer.title}</h4>
+                    <p style="margin: 0; color: #666; font-size: 14px;">${offer.description}</p>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(400px)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 5000);
+            };
+            
+            let offerIndex = 0;
+            setInterval(() => {
+                createOffer(offersData[offerIndex]);
+                offerIndex = (offerIndex + 1) % offersData.length;
+            }, 8000);
+        });
+</script>
+</html>
+
+

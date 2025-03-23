@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body{
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            font-family: "Poppins", serif;
+            display: flex;
+            background:url('bgImgLogin.webp') no-repeat;
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(10px);
+            height: 100vh;
+        }
+
+        .main{
+            width: 400px;
+            height: 630px;
+            background:#1e7a46;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 5px 20px 50px black;
+            margin-top: 5px;
+           
+        }
+
+        #chk{
+            display: none;
+        }
+
+        .signup{
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin-top: -20px;
+        }
+
+        .eye-button {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      transform: translateY(-55%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      width: 50px;
+      height: 30px;
+      margin-top: 20px;
+    }
+
+    .eye-button img {
+      width: 25px;
+      height: 25px;
+    }
+
+    .eye-button:hover{
+      background-color: white;
+      border: none;
+      box-shadow: none;
+    }
+
+        label{
+            color: white;
+            font-size: 2.5rem;
+            justify-content: center;
+            display: flex;
+            margin: 65px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 1s ease-in-out; 
+            
+        }
+
+        h2{
+           margin-top: -5px;
+           margin-bottom: 17px;
+           margin-left: 30px;
+           font-size: 1rem;
+           font-weight: 600;
+        }
+
+        .part{
+          transform: translateY(-20px);
+        }
+
+        input{
+           width: 80%;
+           height: 35px;
+           background-color: white;
+           justify-content: center;
+           display: flex;
+           margin: 10px auto;
+           padding:3px;
+           border: none;
+           border-radius: 20px;
+           text-align: center;
+           font-weight: bold;
+           margin-top: -10px;
+           margin-bottom: 15px;
+        }
+
+        button{
+            width: 90px;
+            height: 40px;
+            margin: 20px auto;
+            justify-content: center;
+            display: block;
+            color: white;
+            background-color:#1e7a46;
+            cursor: pointer;
+            transition: .5s ease-in-out;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-top: -4px;
+        }
+
+        button:hover{
+            background-color:#ffd700;
+            box-shadow: 0 4px 6px black;
+            color: #444;
+        }
+
+        .login{
+            height: 550px;
+            background-color: rgb(36, 32, 32);
+            border-radius: 60%/10%;
+            transform: translateY(-180px);
+            transition: .8s ease-in-out;
+            margin-top: 50px;
+        }
+
+        
+        .name02,
+        .pass02{
+          color:white ;
+          margin-bottom: 25px;
+          line-height: 25px;
+        
+        }
+
+        .nameimg,.passimg{
+          position: fixed;
+          height: 20px;
+          width: 20px;
+          align-items: end;
+          transform: translateX(310px);
+          margin-top: -46px;
+        }
+
+        .name2,.pass2{
+         padding: 13px;
+        }
+
+        .login label{
+            color:white;
+            transform: scale(.6);
+        }
+
+        #chk:checked ~ .login{
+           transform: translateY(-620px);
+        }
+
+        #chk:checked~.login label{
+           transform: scale(1); 
+        }
+
+        #chk:checked~.signup label{
+            transform: scale(.6);
+        }
+
+        .or{
+            font-size: 20px;
+            align-items: center;
+            text-align: center;
+            padding: 0%;
+            margin-bottom: -20px;
+            margin-top: -15px;
+        }
+
+        .google-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 350px;
+      height: 50px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #444;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .google-button:hover {
+       
+      background-color: rgb(226, 225, 225);
+    }
+
+    .google-button img {
+      height: 20px;
+      width: 20px;
+      margin-right:3px;
+      padding-right: 10px;
+    }
+    .submit-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;  
+  height: 50px;
+  background-color:#ffd700;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.submit-button:hover{
+  background-color: #444;
+  color: #ffd700;
+}
+
+.submit-text, 
+.loader, 
+.success-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid white;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.success-message {
+  color: white;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.submit-button .submit-text {
+  transition: all 0.3s ease;
+}
+
+.submit-button.submitting .submit-text {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.submit-button.submitting .loader {
+  opacity: 1;
+  visibility: visible;
+}
+
+.submit-button.success .submit-text,
+.submit-button.success .loader {
+  display: none;
+}
+
+.submit-button.success .success-message {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+    </style>
+</head>
+<link rel="web icon" href="irctc_logo-removebg-preview.png" type="png">
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+         <div class="signup">
+            <form action="/">
+                <label for="chk" aria-hidden="true">Sign Up</label>
+               <div class="part">
+                <div class="name1"><h2 class="name01">Enter Name</h2><input type="text" name="txt" required="" placeholder="Your Good Name?"></div>
+                <div class="email1"><h2 class="02">Enter Email</h2><input type="email" name="email" required="" placeholder="Your email address?"></div>
+                <div class="pass1"><h2 class="03">Create a password</h2><input type="password" name="pass" required="" placeholder="Password" id="password">
+                  <button class="eye-button" onclick="togglePassword()" type="button">
+                    <img id="eye-icon" src="eyeclose.png" alt="Show Password">
+                  </button>
+                </div>
+                <button class="submit-button" onclick="submitButton()">
+                    <span class="submit-text">Sign Up</span>
+                    <div class="loader"></div>
+                    <div class="success-message">Success!</div>
+                  </button>
+                <div class="or"><h5>Or</h5></div>
+                <button class="google-button" type="button" >
+                    <img src="google logo.png" alt="Google Logo">
+                    Sign up with Google
+                  </button>
+               </div>
+
+            </form>
+         </div>
+
+        <div class="login">
+            <form action="/" class="form1">
+                <label for="chk" aria-hidden="true" class="login1">Login</label>
+                <div class="name2"><h2 class="name02">Enter your username or email</h2><input type="text" name="txt" required="" placeholder="Username or Email"><img src="username.png" alt="" class="nameimg"></div>
+                <div class="pass2"><h2 class="pass02">Password</h2><input type="password" name="pass1" required="" placeholder="Password"><img src="password.png" alt="" class="passimg"></div>
+                <button>Login</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function submitButton() {
+  const button = document.querySelector('.submit-button');
+  
+  // Reset all previous states
+  button.classList.remove('success', 'submitting');
+  
+  // Start submitting
+  button.classList.add('submitting');
+  
+  // Simulate submission process
+  setTimeout(() => {
+    button.classList.remove('submitting');
+    button.classList.add('success');
+  }, 3000);
+}
+
+function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const eyeIcon = document.getElementById('eye-icon');
+      const isPasswordVisible = passwordInput.type === 'password';
+
+      // Toggle password visibility
+      passwordInput.type = isPasswordVisible ? 'text' : 'password';
+
+      // Toggle eye icon
+      eyeIcon.src = isPasswordVisible 
+        ? 'eyeclose.png' // Eye closed Icon
+        : 'eyeopen.png'; // Eye opened Icon
+    }
+    </script>
+    
+</body>
+</html>

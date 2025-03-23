@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC - Train List</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f7f2;
+            color: #333;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #fff;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 22px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #333;
+        }
+        
+        .book-now-btn {
+            background-color: #ffd700;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .book-now-btn:hover {
+            background-color: #ffcc00;
+        }
+
+        .logoimg{
+            width: 60px;
+            height: 50px;
+        }
+        
+        /* Navigation Bar */
+        .secondary-nav {
+            background-color: #f9f7f2;
+            padding: 15px 5%;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .secondary-nav a {
+            display: inline-block;
+            margin: 0 15px;
+            color: #3d6b58;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 40px 5%;
+            position: relative;
+            background-color: #f9f7f2;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        /* Train List Section */
+        .train-list-container {
+            padding: 40px 5%;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            color: #ffd700;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .title-accent {
+            color: #333;
+        }
+        
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        
+        .train-card {
+            display: flex;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .train-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .train-image {
+            width: 180px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .train-details {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .train-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .train-number {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .route-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .station {
+            font-weight: 500;
+        }
+        
+        .route-arrow {
+            margin: 0 10px;
+            color: #3d6b58;
+        }
+        
+        .schedule-info {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .departure, .arrival, .duration {
+            margin-right: 20px;
+        }
+        
+        .time-label {
+            font-weight: 500;
+            color: #3d6b58;
+        }
+        
+        .train-features {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .feature {
+            background-color: #f5f5f5;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-right: 10px;
+            color: #555;
+        }
+        
+        .price-booking {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #3d6b58;
+        }
+        
+        .view-details-btn {
+            background-color: #fff;
+            color: #3d6b58;
+            border: 1px solid #3d6b58;
+            padding: 8px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .view-details-btn:hover {
+            background-color: #3d6b58;
+            color: #fff;
+        }
+        
+        .book-btn {
+            background-color: #ffd700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .book-btn:hover {
+            background-color: #ffcc00;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover, .pagination a.active {
+            background-color: #ffd700;
+            color: #333;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 5%;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .footer-section {
+            max-width: 300px;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 900px) {
+            .train-image {
+                width: 120px;
+            }
+            
+            .route-info, .schedule-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .departure, .arrival, .duration {
+                margin-bottom: 5px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin: 20px 0;
+            }
+            
+            .filter-bar {
+                flex-direction: column;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            
+            .train-card {
+                flex-direction: column;
+            }
+            
+            .train-image {
+                width: 100%;
+                height: 150px;
+            }
+            
+            .price-booking {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<link rel="web icon" href="irctc_logo-removebg-preview.png" type="png">
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <span class="logo-icon"><img src="irctc_logo-removebg-preview.png" alt="irctc logo" class="logoimg"></span>
+            IRCTC
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="trains.html">Trains</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="booking.html" class="book-now-btn">Book Now</a>
+    </header>
+    
+    <!-- Secondary Navigation -->
+    <div class="secondary-nav">
+        <a href="#">Top Routes</a>
+        <a href="#">Express Trains</a>
+        <a href="#">Luxury Service</a>
+        <a href="#">Weekend Trips</a>
+        <a href="#">Special Offers</a>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Find Your Perfect Train</h1>
+        <p>Browse and discover trains connecting major cities. Book tickets, check schedules, and travel with comfort and convenience.</p>
+    </section>
+    
+    <!-- Train List Section -->
+    <section class="train-list-container">
+        <h2 class="section-title">Available <span class="title-accent">Trains</span></h2>
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="search-container">
+                <input type="text" placeholder="Search by train name or number..." id="searchInput">
+            </div>
+            <div class="filter-options">
+                <select class="filter-select" id="sortFilter">
+                    <option value="departure">Sort by: Departure Time</option>
+                    <option value="duration">Sort by: Duration</option>
+                    <option value="price">Sort by: Price</option>
+                </select>
+                <select class="filter-select" id="trainTypeFilter">
+                    <option value="all">All Train Types</option>
+                    <option value="express">Express</option>
+                    <option value="superfast">Superfast</option>
+                    <option value="luxury">Luxury</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Train Cards -->
+        <div class="train-list" id="trainList">
+            <!-- Train Card 1 -->
+            <div class="train-card" data-train-type="express">
+                <div class="train-image" style="background-image: url('Delhi to Mumbai.webp');"></div>
+                <div class="train-details">
+                    <h3 class="train-name">Rajdhani Express</h3>
+                    <p class="train-number">Train No: 12301</p>
+                    
+                    <div class="route-info">
+                        <span class="station">New Delhi</span>
+                        <span class="route-arrow">→</span>
+                        <span class="station">Mumbai Central</span>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="departure">
+                            <span class="time-label">Departure: </span>
+                            <span>07:30 AM</span>
+                        </div>
+                        <div class="arrival">
+                            <span class="time-label">Arrival: </span>
+                            <span>10:05 PM</span>
+                        </div>
+                        <div class="duration">
+                            <span class="time-label">Duration: </span>
+                            <span>14h 35m</span>
+                        </div>
+                    </div>
+                    
+                    <div class="train-features">
+                        <span class="feature">Wi-Fi</span>
+                        <span class="feature">Food Included</span>
+                        <span class="feature">AC Coaches</span>
+                        <span class="feature">Charging Points</span>
+                    </div>
+                    
+                    <div class="price-booking">
+                        <div class="price">₹1,850</div>
+                        <div>
+                            <a href="train-details.html?id=12301" class="view-details-btn">View Details</a>
+                            <a href="booking.html?id=12301" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Train Card 2 -->
+            <div class="train-card" data-train-type="superfast">
+                <div class="train-image" style="background-image: url('Bangalore to Chennai.webp');"></div>
+                <div class="train-details">
+                    <h3 class="train-name">Shatabdi Express</h3>
+                    <p class="train-number">Train No: 12002</p>
+                    
+                    <div class="route-info">
+                        <span class="station">New Delhi</span>
+                        <span class="route-arrow">→</span>
+                        <span class="station">Lucknow</span>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="departure">
+                            <span class="time-label">Departure: </span>
+                            <span>06:15 AM</span>
+                        </div>
+                        <div class="arrival">
+                            <span class="time-label">Arrival: </span>
+                            <span>12:40 PM</span>
+                        </div>
+                        <div class="duration">
+                            <span class="time-label">Duration: </span>
+                            <span>6h 25m</span>
+                        </div>
+                    </div>
+                    
+                    <div class="train-features">
+                        <span class="feature">Wi-Fi</span>
+                        <span class="feature">Food Included</span>
+                        <span class="feature">Executive Class</span>
+                        <span class="feature">Fastest Route</span>
+                    </div>
+                    
+                    <div class="price-booking">
+                        <div class="price">₹1,220</div>
+                        <div>
+                            <a href="train-details.html?id=12002" class="view-details-btn">View Details</a>
+                            <a href="booking.html?id=12002" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Train Card 3 -->
+            <div class="train-card" data-train-type="luxury">
+                <div class="train-image" style="background-image: url('Ahmedabad to Mumbai.webp');"></div>
+                <div class="train-details">
+                    <h3 class="train-name">Deccan Odyssey</h3>
+                    <p class="train-number">Train No: 11007</p>
+                    
+                    <div class="route-info">
+                        <span class="station">Mumbai</span>
+                        <span class="route-arrow">→</span>
+                        <span class="station">Goa</span>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="departure">
+                            <span class="time-label">Departure: </span>
+                            <span>09:30 AM</span>
+                        </div>
+                        <div class="arrival">
+                            <span class="time-label">Arrival: </span>
+                            <span>05:15 PM</span>
+                        </div>
+                        <div class="duration">
+                            <span class="time-label">Duration: </span>
+                            <span>7h 45m</span>
+                        </div>
+                    </div>
+                    
+                    <div class="train-features">
+                        <span class="feature">Luxury Interior</span>
+                        <span class="feature">Gourmet Meals</span>
+                        <span class="feature">Private Cabins</span>
+                        <span class="feature">Panoramic Views</span>
+                    </div>
+                    
+                    <div class="price-booking">
+                        <div class="price">₹3,500</div>
+                        <div>
+                            <a href="train-details.html?id=11007" class="view-details-btn">View Details</a>
+                            <a href="booking.html?id=11007" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Train Card 4 -->
+            <div class="train-card" data-train-type="express">
+                <div class="train-image" style="background-image: url('Kolkata to Delhi.webp');"></div>
+                <div class="train-details">
+                    <h3 class="train-name">Duronto Express</h3>
+                    <p class="train-number">Train No: 12213</p>
+                    
+                    <div class="route-info">
+                        <span class="station">Bangalore</span>
+                        <span class="route-arrow">→</span>
+                        <span class="station">Chennai</span>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="departure">
+                            <span class="time-label">Departure: </span>
+                            <span>10:45 AM</span>
+                        </div>
+                        <div class="arrival">
+                            <span class="time-label">Arrival: </span>
+                            <span>04:20 PM</span>
+                        </div>
+                        <div class="duration">
+                            <span class="time-label">Duration: </span>
+                            <span>5h 35m</span>
+                        </div>
+                    </div>
+                    
+                    <div class="train-features">
+                        <span class="feature">Non-Stop</span>
+                        <span class="feature">Meals Available</span>
+                        <span class="feature">AC & Non-AC Options</span>
+                        <span class="feature">Family Friendly</span>
+                    </div>
+                    
+                    <div class="price-booking">
+                        <div class="price">₹950</div>
+                        <div>
+                            <a href="train-details.html?id=12213" class="view-details-btn">View Details</a>
+                            <a href="booking.html?id=12213" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">Next →</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">IRCTC</div>
+                <p>Your trusted partner for hassle-free train travel booking and information. Connect with us for the best journey experience.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="trains.html">Train List</a></li>
+                    <li><a href="routes.html">Popular Routes</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Booking Guide</a></li>
+                    <li><a href="#">Cancellation Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li>Email: info@irctc.com</li>
+                    <li>Phone: +91 1234567890</li>
+                    <li>Address: Railway Square, New Delhi - 110001</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 IRCTC. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // JavaScript for Train List Filtering and Searching
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const sortFilter = document.getElementById('sortFilter');
+            const trainTypeFilter = document.getElementById('trainTypeFilter');
+            const trainList = document.getElementById('trainList');
+            const trainCards = trainList.querySelectorAll('.train-card');
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                trainCards.forEach(card => {
+                    const trainName = card.querySelector('.train-name').textContent.toLowerCase();
+                    const trainNumber = card.querySelector('.train-number').textContent.toLowerCase();
+                    const stations = card.querySelector('.route-info').textContent.toLowerCase();
+                    
+                    if (trainName.includes(searchTerm) || 
+                        trainNumber.includes(searchTerm) || 
+                        stations.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Train type filter
+            trainTypeFilter.addEventListener('change', function() {
+                const selectedType = this.value;
+                
+                trainCards.forEach(card => {
+                    if (selectedType === 'all' || card.dataset.trainType === selectedType) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Sort functionality
+            sortFilter.addEventListener('change', function() {
+                const sortBy = this.value;
+                const cardsArray = Array.from(trainCards);
+                
+                cardsArray.sort((a, b) => {
+                    if (sortBy === 'price') {
+                        const priceA = parseFloat(a.querySelector('.price').textContent.replace('₹', '').replace(',', ''));
+                        const priceB = parseFloat(b.querySelector('.price').textContent.replace('₹', '').replace(',', ''));
+                        return priceA - priceB;
+                    } 
+                    else if (sortBy === 'duration') {
+                        const getDurationInMinutes = (durationText) => {
+                            const parts = durationText.trim().split('h ');
+                            const hours = parseInt(parts[0]);
+                            const minutes = parseInt(parts[1].replace('m', ''));
+                            return hours * 60 + minutes;
+                        };
+                        
+                        const durationA = getDurationInMinutes(a.querySelector('.duration span:last-child').textContent);
+                        const durationB = getDurationInMinutes(b.querySelector('.duration span:last-child').textContent);
+                        return durationA - durationB;
+                    }
+                    else { // departure
+                        const getDepartureInMinutes = (timeText) => {
+                            const isPM = timeText.includes('PM');
+                            let [hours, minutes] = timeText.replace(' AM', '').replace(' PM', '').split(':');
+                            hours = parseInt(hours);
+                            if (isPM && hours !== 12) hours += 12;
+                            if (!isPM && hours === 12) hours = 0;
+                            return hours * 60 + parseInt(minutes);
+                        };
+                        
+                        const departureA = getDepartureInMinutes(a.querySelector('.departure span:last-child').textContent);
+                        const departureB = getDepartureInMinutes(b.querySelector('.departure span:last-child').textContent);
+                        return departureA - departureB;
+                    }
+                });
+                
+                // Re-append sorted cards
+                cardsArray.forEach(card => {
+                    trainList.appendChild(card);
+                });
+            });
+            
+            // Pagination functionality (simplified)
+            const paginationLinks = document.querySelectorAll('.pagination a');
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    paginationLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // In a real implementation, you would load the appropriate page data here
+                    // This is just a simplified mock-up
+                    if (this.textContent === 'Next →') {
+                        // Find the currently active numbered link and activate the next one
+                        for (let i = 0; i < paginationLinks.length; i++) {
+                            if (paginationLinks[i].classList.contains('active') && i < paginationLinks.length - 2) {
+                                paginationLinks[i].classList.remove('active');
+                                paginationLinks[i+1].classList.add('active');
+                                break;
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
